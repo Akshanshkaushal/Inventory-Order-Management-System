@@ -84,7 +84,7 @@ This repo includes `.github/workflows/docker-hub.yml` for the backend image requ
 3. In GitHub, add repository secrets:
    - `DOCKERHUB_USERNAME`: your Docker Hub username.
    - `DOCKERHUB_TOKEN`: your Docker Hub access token.
-4. Run the `Docker Hub Backend Image` workflow from the GitHub Actions tab, or push to `main`.
+4. Run the `Docker Hub Backend Image` workflow from the GitHub Actions tab.
 5. Submit this Docker Hub image link:
 
 ```text
