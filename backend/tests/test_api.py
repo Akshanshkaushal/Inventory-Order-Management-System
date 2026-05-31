@@ -65,3 +65,30 @@ def test_order_rejects_insufficient_inventory(client):
 
     assert response.status_code == 400
     assert "Insufficient inventory" in response.get_json()["message"]
+
+
+def test_cancel_order_keeps_order_visible_and_marks_cancelled(client):
+    product = create_product(client, quantity=5)
+    customer = create_customer(client)
+
+    create_response = client.post(
+        "/api/orders",
+        json={"customer_id": customer["id"], "items": [{"product_id": product["id"], "quantity": 2}]},
+    )
+    order = create_response.get_json()["data"]
+
+    cancel_response = client.delete(f"/api/orders/{order['id']}")
+
+    assert cancel_response.status_code == 200
+    cancelled_order = cancel_response.get_json()["data"]
+    assert cancelled_order["id"] == order["id"]
+    assert cancelled_order["status"] == "cancelled"
+
+    list_response = client.get("/api/orders")
+    listed_orders = list_response.get_json()["data"]
+    assert len(listed_orders) == 1
+    assert listed_orders[0]["id"] == order["id"]
+    assert listed_orders[0]["status"] == "cancelled"
+
+    product_response = client.get(f"/api/products/{product['id']}")
+    assert product_response.get_json()["data"]["quantity_in_stock"] == 5

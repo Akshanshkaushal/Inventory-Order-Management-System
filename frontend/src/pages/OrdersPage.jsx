@@ -14,6 +14,10 @@ import { useAsync } from '../hooks/useAsync.js';
 import { customersApi, ordersApi, productsApi } from '../services/api.js';
 import { currency, date } from '../utils/format.js';
 
+function orderStatusLabel(status) {
+  return status === 'cancelled' ? 'canceled' : status;
+}
+
 function OrderForm({ customers, products, onSubmit, submitting }) {
   const [lines, setLines] = useState([{ product_id: '', quantity: 1 }]);
   const {
@@ -153,7 +157,7 @@ function OrderDetails({ order }) {
         </div>
         <div>
           <p className="text-slate-500">Status</p>
-          <p className="font-medium capitalize text-ink">{order.status}</p>
+          <p className="font-medium capitalize text-ink">{orderStatusLabel(order.status)}</p>
         </div>
         <div>
           <p className="text-slate-500">Created</p>
@@ -222,7 +226,7 @@ export default function OrdersPage() {
   async function cancelOrder() {
     try {
       await ordersApi.remove(confirming.id);
-      pushToast('Order cancelled');
+      pushToast('Order canceled');
       setConfirming(null);
       await refetch();
       await refetchProducts();
@@ -254,7 +258,7 @@ export default function OrdersPage() {
           <p className="mt-2 text-2xl font-semibold text-teal-700">{orders.filter((order) => order.status !== 'cancelled').length}</p>
         </div>
         <div className="surface rounded-md p-4">
-          <p className="metric-label">Cancelled</p>
+          <p className="metric-label">Canceled</p>
           <p className="mt-2 text-2xl font-semibold text-slate-600">{orders.filter((order) => order.status === 'cancelled').length}</p>
         </div>
       </section>
@@ -284,7 +288,7 @@ export default function OrdersPage() {
                     <td className="px-5 py-3 text-slate-600">{order.customer.full_name}</td>
                     <td className="px-5 py-3">
                       <span className={`rounded px-2 py-1 text-xs font-semibold ${order.status === 'cancelled' ? 'bg-slate-100 text-slate-700' : 'bg-teal-100 text-teal-700'}`}>
-                        {order.status}
+                        {orderStatusLabel(order.status)}
                       </span>
                     </td>
                     <td className="px-5 py-3 text-slate-600">{currency(order.total_amount)}</td>

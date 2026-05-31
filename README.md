@@ -35,7 +35,7 @@ The frontend follows a practical dashboard structure with layouts, pages, reusab
 - Orders fail when inventory is insufficient.
 - Order totals are calculated by the backend.
 - Successful orders deduct stock in the same transaction.
-- Deleting an order restores stock and removes the order record.
+- Canceling an order restores stock and keeps the order marked as canceled for history.
 - API responses use a consistent success/error envelope.
 
 ## Local Setup

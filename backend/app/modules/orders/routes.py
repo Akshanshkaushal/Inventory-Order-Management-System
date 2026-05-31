@@ -30,4 +30,4 @@ def get_order(order_id: int):
 @orders_bp.delete("/<int:order_id>")
 def cancel_order(order_id: int):
     order = OrderService(get_request_db()).cancel_order(order_id)
-    return api_response("Order cancelled", order)
+    return api_response("Order canceled", OrderRead.model_validate(order))

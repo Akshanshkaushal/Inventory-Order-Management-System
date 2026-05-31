@@ -10,7 +10,7 @@ from app.database.models.customer import Customer
 from app.database.models.order import Order, OrderItem, OrderStatus
 from app.database.models.product import Product
 from app.modules.orders.repositories import OrderRepository
-from app.modules.orders.schemas import OrderCreate, OrderRead
+from app.modules.orders.schemas import OrderCreate
 
 
 class OrderService:
@@ -85,7 +85,7 @@ class OrderService:
             self.db.rollback()
             raise AppError("Order could not be created", HTTPStatus.INTERNAL_SERVER_ERROR) from exc
 
-    def cancel_order(self, order_id: int) -> OrderRead:
+    def cancel_order(self, order_id: int) -> Order:
         order = self.get_order(order_id)
         if order.status == OrderStatus.CANCELLED.value:
             raise AppError("Order is already cancelled", HTTPStatus.CONFLICT)
@@ -110,10 +110,8 @@ class OrderService:
                 products[item.product_id].quantity_in_stock += item.quantity
 
             locked_order.status = OrderStatus.CANCELLED.value
-            response = OrderRead.model_validate(locked_order)
-            self.db.delete(locked_order)
             self.db.commit()
-            return response
+            return self.get_order(order_id)
         except AppError:
             self.db.rollback()
             raise

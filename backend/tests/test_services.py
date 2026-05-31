@@ -2,6 +2,7 @@ from decimal import Decimal
 
 from app.database.models.customer import Customer
 from app.database.models.product import Product
+from app.database.models.order import OrderStatus
 from app.modules.orders.schemas import OrderCreate, OrderItemCreate
 from app.modules.orders.services import OrderService
 
@@ -20,6 +21,8 @@ def test_order_service_restores_stock_when_order_is_cancelled(db_session):
     )
     assert db_session.get(Product, product.id).quantity_in_stock == 1
 
-    service.cancel_order(order.id)
-    assert db_session.get(Product, product.id).quantity_in_stock == 4
+    cancelled_order = service.cancel_order(order.id)
 
+    assert db_session.get(Product, product.id).quantity_in_stock == 4
+    assert cancelled_order.status == OrderStatus.CANCELLED.value
+    assert db_session.get(type(order), order.id).status == OrderStatus.CANCELLED.value
