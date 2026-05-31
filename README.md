@@ -154,11 +154,4 @@ Frontend:
 ### Orders Management
 ![Orders Page](images/Screenshot%202026-05-31%20205248.png)
 ![Create Order](images/Screenshot%202026-05-31%20205255.png)
-
-## Future Improvements
-
-- Authentication and role-based access control.
-- Audit log for product and customer changes.
-- CSV import/export for products.
-- Purchase order workflow for restocking.
-- Background job for low-stock email alerts.
+ 
