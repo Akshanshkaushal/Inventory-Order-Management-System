@@ -140,12 +140,20 @@ Frontend:
 
 ## Screenshots
 
-Add screenshots here after the first deployed run:
+### Dashboard
+![Dashboard Overview](images/Screenshot%202026-05-31%20205255.png)
 
-- Dashboard
-- Products
-- Customers
-- Orders
+### Products Management
+![Products Page](images/Screenshot%202026-05-31%20205228.png)
+![Add Product](images/Screenshot%202026-05-31%20205222.png)
+
+### Customers Management
+![Customers Page](images/Screenshot%202026-05-31%20205235.png)
+![Add Customer](images/Screenshot%202026-06-01%20025402.png)
+
+### Orders Management
+![Orders Page](images/Screenshot%202026-05-31%20205240.png)
+![Create Order](images/Screenshot%202026-05-31%20205248.png)
 
 ## Future Improvements
 
