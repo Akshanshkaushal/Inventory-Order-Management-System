@@ -13,4 +13,4 @@ dist/
 coverage/
 *.log
 *.db
-deployment.md
+/deployment.md
