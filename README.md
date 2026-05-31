@@ -141,19 +141,19 @@ Frontend:
 ## Screenshots
 
 ### Dashboard
-![Dashboard Overview](images/Screenshot%202026-05-31%20205255.png)
+![Dashboard Overview](images/Screenshot%202026-06-01%20025402.png)
 
 ### Products Management
-![Products Page](images/Screenshot%202026-05-31%20205228.png)
-![Add Product](images/Screenshot%202026-05-31%20205222.png)
+![Products Page](images/Screenshot%202026-05-31%20205222.png)
+![Add Product](images/Screenshot%202026-05-31%20205228.png)
 
 ### Customers Management
 ![Customers Page](images/Screenshot%202026-05-31%20205235.png)
-![Add Customer](images/Screenshot%202026-06-01%20025402.png)
+![Add Customer](images/Screenshot%202026-05-31%20205240.png)
 
 ### Orders Management
-![Orders Page](images/Screenshot%202026-05-31%20205240.png)
-![Create Order](images/Screenshot%202026-05-31%20205248.png)
+![Orders Page](images/Screenshot%202026-05-31%20205248.png)
+![Create Order](images/Screenshot%202026-05-31%20205255.png)
 
 ## Future Improvements
 
