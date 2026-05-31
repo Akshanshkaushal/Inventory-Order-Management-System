@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, within } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 
 import DashboardPage from './DashboardPage.jsx';
@@ -15,15 +15,18 @@ vi.mock('../services/api.js', () => ({
         },
       }),
   },
+  productsApi: {
+    list: () => Promise.resolve({ data: [] }),
+  },
 }));
 
 describe('DashboardPage', () => {
   it('renders summary metrics', async () => {
     render(<DashboardPage />);
     await waitFor(() => expect(screen.getByText('Total products')).toBeInTheDocument());
-    expect(screen.getByText('2')).toBeInTheDocument();
-    expect(screen.getByText('Total customers')).toBeInTheDocument();
-    expect(screen.getByText('Total orders')).toBeInTheDocument();
+
+    expect(within(screen.getByText('Total products').parentElement).getByText('2')).toBeInTheDocument();
+    expect(within(screen.getByText('Total customers').parentElement).getByText('1')).toBeInTheDocument();
+    expect(within(screen.getByText('Total orders').parentElement).getByText('3')).toBeInTheDocument();
   });
 });
-
